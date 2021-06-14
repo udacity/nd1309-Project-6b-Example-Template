@@ -47,4 +47,11 @@ contract Ownable {
         emit TransferOwnership(origOwner, newOwner);
         origOwner = newOwner;
     }
+
+    // Define a function 'kill' if required
+    function kill() public {
+        if (isOwner()) {
+            selfdestruct(origOwner);
+        }
+    }
 }

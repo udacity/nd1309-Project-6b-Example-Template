@@ -15,12 +15,6 @@ contract SupplyChain is
     RetailerRole,
     ConsumerRole
 {
-    Ownable private ownable;
-    FarmerRole private farmerRole;
-    DistributorRole private distributorRole;
-    RetailerRole private retailerRole;
-    ConsumerRole private consumerRole;
-
     // Define a variable called 'upc' for Universal Product Code (UPC)
     uint256 upc;
 
@@ -151,14 +145,6 @@ contract SupplyChain is
     constructor() public payable {
         sku = 1;
         upc = 1;
-
-        ownable = new Ownable();
-        ownable.transferOwnership(msg.sender);
-
-        farmerRole = new FarmerRole();
-        distributorRole = new DistributorRole();
-        retailerRole = new RetailerRole();
-        consumerRole = new ConsumerRole();
     }
 
     // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
@@ -170,7 +156,7 @@ contract SupplyChain is
         string memory _originFarmLatitude,
         string memory _originFarmLongitude,
         string memory _productNotes
-    ) public onlyFarmer() {
+    ) public onlyFarmer {
         // Add the new item as part of Harvest
         items[upc] = Item({
             sku: sku,
