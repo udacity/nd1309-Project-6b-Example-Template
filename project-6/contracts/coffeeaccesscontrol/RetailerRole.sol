@@ -1,4 +1,5 @@
-pragma solidity 0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.4.24;
 
 // Import the library 'Roles'
 import "./Roles.sol";
@@ -21,10 +22,7 @@ contract RetailerRole {
 
     // Define a modifier that checks to see if msg.sender has the appropriate role
     modifier onlyRetailer() {
-        require(
-            isRetailer(msg.sender),
-            "You must be a Retailer to call this function"
-        );
+        require(isRetailer(msg.sender));
         _;
     }
 

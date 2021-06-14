@@ -38,20 +38,21 @@ App = {
         App.retailerID = $("#retailerID").val();
         App.consumerID = $("#consumerID").val();
 
-        console.log(
-            App.sku,
-            App.upc,
-            App.ownerID, 
-            App.originFarmerID, 
-            App.originFarmName, 
-            App.originFarmInformation, 
-            App.originFarmLatitude, 
-            App.originFarmLongitude, 
-            App.productNotes, 
-            App.productPrice, 
-            App.distributorID, 
-            App.retailerID, 
-            App.consumerID
+        console.table({
+            sku: App.sku,
+            upc: App.upc,
+            ownerId: App.ownerID, 
+            originFarmerID: App.originFarmerID, 
+            originFarmName: App.originFarmName, 
+            originFarmInformation: App.originFarmInformation, 
+            originFarmLatitude: App.originFarmLatitude, 
+            originFarmLongitde: App.originFarmLongitude, 
+            productNotes: App.productNotes, 
+            productPrice: App.productPrice, 
+            distributorID: App.distributorID, 
+            retailerID: App.retailerID, 
+            consumerID: App.consumerID
+        }
         );
     },
 
@@ -62,7 +63,7 @@ App = {
             App.web3Provider = window.ethereum;
             try {
                 // Request account access
-                await window.ethereum.enable();
+                await window.ethereum.request({ method: 'eth_requestAccounts'})
             } catch (error) {
                 // User denied account access...
                 console.error("User denied account access")
@@ -103,7 +104,7 @@ App = {
         
         /// JSONfy the smart contracts
         $.getJSON(jsonSupplyChain, function(data) {
-            console.log('data',data);
+            console.table(data);
             var SupplyChainArtifact = data;
             App.contracts.SupplyChain = TruffleContract(SupplyChainArtifact);
             App.contracts.SupplyChain.setProvider(App.web3Provider);
@@ -296,21 +297,20 @@ App = {
           return instance.fetchItemBufferOne(App.upc);
         }).then(function(result) {
           $("#ftc-item").text(result);
-          console.log('fetchItemBufferOne', result);
+          console.log('fetchItemBufferOne');
+          console.table(result)
         }).catch(function(err) {
           console.log(err.message);
         });
     },
 
-    fetchItemBufferTwo: function () {
-    ///    event.preventDefault();
-    ///    var processId = parseInt($(event.target).data('id'));
-                        
+    fetchItemBufferTwo: function () {                      
         App.contracts.SupplyChain.deployed().then(function(instance) {
           return instance.fetchItemBufferTwo.call(App.upc);
         }).then(function(result) {
           $("#ftc-item").text(result);
-          console.log('fetchItemBufferTwo', result);
+          console.log('fetchItemBufferTwo');
+          console.table(result)
         }).catch(function(err) {
           console.log(err.message);
         });

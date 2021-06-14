@@ -1,4 +1,5 @@
-pragma solidity 0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.4.24;
 
 // Import the library 'Roles'
 import "./Roles.sol";
@@ -21,10 +22,7 @@ contract ConsumerRole {
 
     // Define a modifier that checks to see if msg.sender has the appropriate role
     modifier onlyConsumer() {
-        require(
-            isConsumer(msg.sender),
-            "You must be a Consumer to call this function"
-        );
+        require(isConsumer(msg.sender));
         _;
     }
 

@@ -1,4 +1,5 @@
-pragma solidity 0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.4.24;
 
 /// Provides basic authorization control
 contract Ownable {
@@ -8,7 +9,7 @@ contract Ownable {
     event TransferOwnership(address indexed oldOwner, address indexed newOwner);
 
     /// Assign the contract to an owner
-    constructor() internal {
+    constructor() public {
         origOwner = msg.sender;
         emit TransferOwnership(address(0), origOwner);
     }

@@ -1,4 +1,5 @@
-pragma solidity 0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.4.24;
 
 // Import the library 'Roles'
 import "./Roles.sol";
@@ -20,10 +21,7 @@ contract DistributorRole {
 
     // Define a modifier that checks to see if msg.sender has the appropriate role
     modifier onlyDistributor() {
-        require(
-            isDistributor(msg.sender),
-            "You must be a Distributor to call this function"
-        );
+        require(isDistributor(msg.sender));
         _;
     }
 
