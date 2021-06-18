@@ -1,6 +1,6 @@
 # Project Information
 
-- [UML Diagram](uml)
+- [UML Diagram](UML)
 - Programm Version: 1.0.0
 - Node Version: 14.17.0
 - Web3: 0.20.6
