@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "lite-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run ganache:dev & sleep 5 && npx truffle test",
+    "ganache:dev": "npx ganache-cli -m \"spirit supply whale amount human item harsh scare congress discover talent hamster\""
   },
   "keywords": [],
   "author": "pk <pkrasam@gmail.com> (https://ipfs.infura.io/ipfs/QmSXiR9Khm3yo1J67nUopvVBxFJ8YGN2fUGZ34Etr3m92x/)",
