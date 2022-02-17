@@ -4,10 +4,10 @@ import "../coffeeaccesscontrol/ConsumerRole.sol";
 import "../coffeeaccesscontrol/DistributorRole.sol";
 import "../coffeeaccesscontrol/FarmerRole.sol";
 import "../coffeeaccesscontrol/RetailerRole.sol";
-import "../coffeecore/Ownable.sol";
+//import "../coffeecore/Ownable.sol";
 
 // Define a contract 'Supplychain'
-contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole, Ownable {
+contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole {
 
   // Define 'owner'
   address owner;
@@ -151,7 +151,6 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole,
     DistributorRole()
     FarmerRole()
     RetailerRole()
-    Ownable() 
     {
     owner = msg.sender;
     sku = 1;
