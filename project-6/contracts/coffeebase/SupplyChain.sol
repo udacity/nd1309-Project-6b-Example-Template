@@ -240,7 +240,7 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole,
     items[_upc].distributorID = msg.sender;
     items[_upc].itemState = State.Sold;
     // Transfer money to farmer
-    address payable paymentReciever = payable(items[_upc].originFarmerID);
+    address paymentReciever = (items[_upc].originFarmerID);
     paymentReciever.transfer(items[_upc].productPrice);
     // emit the appropriate event
     emit Sold(_upc);
