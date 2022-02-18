@@ -169,22 +169,21 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole 
   onlyFarmer()
   {
     // Add the new item as part of Harvest
-    Item memory item;
-    item.sku = sku;
-    item.upc = _upc;
-    item.originFarmerID = _originFarmerID;
-    item.originFarmName = _originFarmName;
-    item.originFarmInformation = _originFarmInformation;
-    item.originFarmLatitude = _originFarmLatitude;
-    item.originFarmLongitude = _originFarmLongitude;
-    item.productID = _upc + sku;
-    item.productNotes = _productNotes;
-    item.productPrice = 0;
-    item.itemState = State.Harvested;
-    item.distributorID = address(0);
-    item.retailerID = address(0);
-    item.consumerID = address(0);
-    item.ownerID = msg.sender;
+    items[upc].sku = sku;
+    items[upc].upc = _upc;
+    items[upc].originFarmerID = _originFarmerID;
+    items[upc].originFarmName = _originFarmName;
+    items[upc].originFarmInformation = _originFarmInformation;
+    items[upc].originFarmLatitude = _originFarmLatitude;
+    items[upc].originFarmLongitude = _originFarmLongitude;
+    items[upc].productID = _upc + sku;
+    items[upc].productNotes = _productNotes;
+    items[upc].productPrice = 0;
+    items[upc].itemState = State.Harvested;
+    items[upc].distributorID = address(0);
+    items[upc].retailerID = address(0);
+    items[upc].consumerID = address(0);
+    items[upc].ownerID = msg.sender;
     // Increment sku
     sku = sku + 1;
     // Emit the appropriate event
