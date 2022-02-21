@@ -169,22 +169,23 @@ contract SupplyChain is ConsumerRole, DistributorRole, FarmerRole, RetailerRole 
   onlyFarmer()
   {
     // Add the new item as part of Harvest
-    Item memory item;
-    item.sku = sku;
-    item.upc = _upc;
-    item.originFarmerID = _originFarmerID;
-    item.originFarmName = _originFarmName;
-    item.originFarmInformation = _originFarmInformation;
-    item.originFarmLatitude = _originFarmLatitude;
-    item.originFarmLongitude = _originFarmLongitude;
-    item.productID = _upc + sku;
-    item.productNotes = _productNotes;
-    item.productPrice = 0;
-    item.itemState = State.Harvested;
-    item.distributorID = address(0);
-    item.retailerID = address(0);
-    item.consumerID = address(0);
-    item.ownerID = msg.sender;
+    items[_upc] = Item({
+      sku: sku,
+      upc: _upc,
+      ownerID: msg.sender,
+      originFarmerID: _originFarmerID,
+      originFarmName: _originFarmName,
+      originFarmInformation: _originFarmInformation,
+      originFarmLatitude: _originFarmLatitude,
+      originFarmLongitude: _originFarmLongitude,
+      productID: sku + upc,
+      productNotes: _productNotes,
+      itemState: State.Harvested,
+      productPrice: 0,
+      distributorID: address(0),
+      retailerID: address(0),
+      consumerID: address(0)
+    });
     // Increment sku
     sku = sku + 1;
     // Emit the appropriate event
