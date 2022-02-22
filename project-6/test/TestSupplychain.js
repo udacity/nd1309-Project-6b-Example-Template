@@ -165,7 +165,7 @@ contract('SupplyChain', function(accounts) {
         // Watch the emitted event Shipped()
         
 
-        // Mark an item as Sold by calling function buyItem()
+        // Mark an item as Sold by calling function shipItem()
         
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
@@ -185,7 +185,7 @@ contract('SupplyChain', function(accounts) {
         // Watch the emitted event Received()
         
 
-        // Mark an item as Sold by calling function buyItem()
+        // Mark an item as Sold by calling function receiveItem()
         
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
@@ -205,7 +205,7 @@ contract('SupplyChain', function(accounts) {
         // Watch the emitted event Purchased()
         
 
-        // Mark an item as Sold by calling function buyItem()
+        // Mark an item as Sold by calling function purchaseItem()
         
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
