@@ -30,19 +30,32 @@ var Net = require('web3-net');
 
 
 var Shh = function Shh() {
+
+
     var _this = this;
 
     // sets _requestmanager
     core.packageInit(this, arguments);
 
+    // overwrite package setRequestManager
+    var setRequestManager = this.setRequestManager;
+    this.setRequestManager = function (manager) {
+        setRequestManager(manager);
+
+        _this.net.setRequestManager(manager);
+
+        return true;
+    };
+
     // overwrite setProvider
     var setProvider = this.setProvider;
     this.setProvider = function () {
         setProvider.apply(_this, arguments);
-        _this.net.setProvider.apply(_this, arguments);
+
+        _this.setRequestManager(_this._requestManager);
     };
 
-    this.net = new Net(this.currentProvider);
+    this.net = new Net(this);
 
     [
         new Subscriptions({
