@@ -147,8 +147,8 @@ Link to main contract & transaction history
 https://rinkeby.etherscan.io/address/0x109960972333a8f58a99287d0d2b42f441cbc3f0
 
 ## Libraries Used
-Truffle: v4.1.14
-Node: v14.17.6
-Solidity: ^0.4.24
+* Truffle: v4.1.14
+* Node: v14.17.6
+* Solidity: ^0.4.24
 
 
