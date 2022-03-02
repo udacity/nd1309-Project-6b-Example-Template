@@ -113,31 +113,31 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## Contract Information
 
-**Supply Chain **
+** Supply Chain **
 Transaction Hash
 `0xe19f39283448d8b048e1feefa4d483c4edef39b7cba2155c93664a6338e7e943`
 Contract Address
 `0x109960972333a8F58A99287D0D2B42F441CBC3f0`
 
-**Farmer Role **
+** Farmer Role **
 Transaction Hash
 `0x9fde7e3e9d093628ba843b129a21d9ac0b8ddd50ae9368b94d02417a1b089725`
 Contract Address
 `0x2a8b3d5ecb00b302ecc9c876aafef9ed32c1fd5b`
 
-**Distributor Role **
+** Distributor Role **
 Transaction Hash
 `0x6c6669fbe8d5f3679c3b68c7444af7826883f02223616a4d588c75a85944bd7e`
 Contract Address
 `0xdb838311411e42a68da0966f1aae0013148cbd6b`
 
-**Retailer Role **
+** Retailer Role **
 Transaction Hash
 `0xbad7f24495f0f17ac76fdf408cc8b3c430fc499c319b54c37864f02a3e391706`
 Contract Address
 `0xee7331e98cf9225b39fe6d80bbe6a0065eb258c8`
 
-**Consumer Role **
+** Consumer Role **
 Transaction Hash
 `0xd92b3519d2f6ac41b736f008ba8ba01aae01b803f26302bb24794cd8d9d50734`
 Contract Address
