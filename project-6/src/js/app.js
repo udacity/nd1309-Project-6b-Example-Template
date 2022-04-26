@@ -1,4 +1,7 @@
+var contract = require("@truffle/contract");
+
 App = {
+    web3: null,
     web3Provider: null,
     contracts: {},
     emptyAddress: "0x0000000000000000000000000000000000000000",
@@ -20,7 +23,7 @@ App = {
     init: async function () {
         App.readForm();
         /// Setup access to blockchain
-        return await App.initWeb3();
+        return App.initWeb3();
     },
 
     readForm: function () {
@@ -62,7 +65,10 @@ App = {
             App.web3Provider = window.ethereum;
             try {
                 // Request account access
-                await window.ethereum.enable();
+                //await window.ethereum.enable();
+                const addresses = await App.web3Provider.request({ method: "eth_requestAccounts" });
+                console.log("addresses", addresses);
+
             } catch (error) {
                 // User denied account access...
                 console.error("User denied account access")
@@ -77,16 +83,15 @@ App = {
             App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
         }
 
+        App.web3 = new Web3(App.web3Provider);
         App.getMetaskAccountID();
 
         return App.initSupplyChain();
     },
 
     getMetaskAccountID: function () {
-        web3 = new Web3(App.web3Provider);
-
         // Retrieving accounts
-        web3.eth.getAccounts(function(err, res) {
+        App.web3.eth.getAccounts(function(err, res) {
             if (err) {
                 console.log('Error:',err);
                 return;
@@ -131,35 +136,25 @@ App = {
 
         switch(processId) {
             case 1:
-                return await App.harvestItem(event);
-                break;
+                return App.harvestItem(event);
             case 2:
-                return await App.processItem(event);
-                break;
+                return App.processItem(event);
             case 3:
-                return await App.packItem(event);
-                break;
+                return App.packItem(event);
             case 4:
-                return await App.sellItem(event);
-                break;
+                return App.sellItem(event);
             case 5:
-                return await App.buyItem(event);
-                break;
+                return App.buyItem(event);
             case 6:
-                return await App.shipItem(event);
-                break;
+                return App.shipItem(event);
             case 7:
-                return await App.receiveItem(event);
-                break;
+                return App.receiveItem(event);
             case 8:
-                return await App.purchaseItem(event);
-                break;
+                return App.purchaseItem(event);
             case 9:
-                return await App.fetchItemBufferOne(event);
-                break;
+                return App.fetchItemBufferOne(event);
             case 10:
-                return await App.fetchItemBufferTwo(event);
-                break;
+                return App.fetchItemBufferTwo(event);
             }
     },
 
@@ -175,13 +170,14 @@ App = {
                 App.originFarmInformation, 
                 App.originFarmLatitude, 
                 App.originFarmLongitude, 
-                App.productNotes
+                App.productNotes,
+                {from: App.metamaskAccountID}
             );
         }).then(function(result) {
             $("#ftc-item").text(result);
             console.log('harvestItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -195,7 +191,7 @@ App = {
             $("#ftc-item").text(result);
             console.log('processItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
     
@@ -209,7 +205,7 @@ App = {
             $("#ftc-item").text(result);
             console.log('packItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -218,14 +214,14 @@ App = {
         var processId = parseInt($(event.target).data('id'));
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            const productPrice = web3.toWei(1, "ether");
+            const productPrice = App.web3.utils.toWei("0.0001", "ether");
             console.log('productPrice',productPrice);
             return instance.sellItem(App.upc, App.productPrice, {from: App.metamaskAccountID});
         }).then(function(result) {
             $("#ftc-item").text(result);
             console.log('sellItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -234,13 +230,13 @@ App = {
         var processId = parseInt($(event.target).data('id'));
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            const walletValue = web3.toWei(3, "ether");
+            const walletValue = App.web3.utils.toWei("0.0003", "ether");
             return instance.buyItem(App.upc, {from: App.metamaskAccountID, value: walletValue});
         }).then(function(result) {
             $("#ftc-item").text(result);
             console.log('buyItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -254,7 +250,7 @@ App = {
             $("#ftc-item").text(result);
             console.log('shipItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -268,7 +264,7 @@ App = {
             $("#ftc-item").text(result);
             console.log('receiveItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -282,7 +278,7 @@ App = {
             $("#ftc-item").text(result);
             console.log('purchaseItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.error(err);
         });
     },
 
@@ -298,7 +294,7 @@ App = {
           $("#ftc-item").text(result);
           console.log('fetchItemBufferOne', result);
         }).catch(function(err) {
-          console.log(err.message);
+          console.error(err);
         });
     },
 
@@ -312,7 +308,7 @@ App = {
           $("#ftc-item").text(result);
           console.log('fetchItemBufferTwo', result);
         }).catch(function(err) {
-          console.log(err.message);
+          console.error(err);
         });
     },
 
@@ -332,7 +328,7 @@ App = {
             $("#ftc-events").append('<li>' + log.event + ' - ' + log.transactionHash + '</li>');
         });
         }).catch(function(err) {
-          console.log(err.message);
+          console.error(err);
         });
         
     }
