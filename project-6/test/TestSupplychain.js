@@ -21,6 +21,10 @@ contract('SupplyChain', function (accounts) {
   const anyone = accounts[5]
   const emptyAddress = '0x0000000000000000000000000000000000000000'
 
+  const expected = [
+    sku, upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude,
+  ]
+
   ///Available Accounts
   ///==================
   ///(0) 0x27d8d15cbc94527cadf5ec14b69519ae23288b95
@@ -50,6 +54,17 @@ contract('SupplyChain', function (accounts) {
     await this.supplyChain.addConsumer(consumerID)
   })
 
+  const assertResultBufferOne = (result, expected) => {
+    assert.equal(result[0], expected[0], 'Error: Invalid item SKU')
+    assert.equal(result[1], expected[1], 'Error: Invalid item UPC')
+    assert.equal(result[2], expected[2], 'Error: Missing or Invalid ownerID')
+    assert.equal(result[3], expected[3], 'Error: Missing or Invalid originFarmerID')
+    assert.equal(result[4], expected[4], 'Error: Missing or Invalid originFarmName')
+    assert.equal(result[5], expected[5], 'Error: Missing or Invalid originFarmInformation')
+    assert.equal(result[6], expected[6], 'Error: Missing or Invalid originFarmLatitude')
+    assert.equal(result[7], expected[7], 'Error: Missing or Invalid originFarmLongitude')
+  }
+
   // 1st Test
   it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async () => {
 
@@ -64,14 +79,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, originFarmerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], 0, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], itemState, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], emptyAddress, 'Error: Missing or Invalid distributorID')
@@ -91,14 +101,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, originFarmerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], 0, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 1, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], emptyAddress, 'Error: Missing or Invalid distributorID')
@@ -118,14 +123,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, originFarmerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], 0, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 2, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], emptyAddress, 'Error: Missing or Invalid distributorID')
@@ -145,14 +145,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], originFarmerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, originFarmerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], productPrice, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 3, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], emptyAddress, 'Error: Missing or Invalid distributorID')
@@ -172,14 +167,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], distributorID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, distributorID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], productPrice, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 4, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], distributorID, 'Error: Missing or Invalid distributorID')
@@ -199,14 +189,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], distributorID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, distributorID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], productPrice, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 5, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], distributorID, 'Error: Missing or Invalid distributorID')
@@ -226,14 +211,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], retailerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, retailerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], productPrice, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 6, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], distributorID, 'Error: Missing or Invalid distributorID')
@@ -253,14 +233,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferTwo = await this.supplyChain.fetchItemBufferTwo.call(upc)
 
     // Verify the result set
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], consumerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, consumerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
     assert.equal(resultBufferTwo[4], productPrice, 'Error: Invalid productPrice')
     assert.equal(resultBufferTwo[5], 7, 'Error: Invalid item State')
     assert.equal(resultBufferTwo[6], distributorID, 'Error: Missing or Invalid distributorID')
@@ -275,14 +250,9 @@ contract('SupplyChain', function (accounts) {
     const resultBufferOne = await this.supplyChain.fetchItemBufferOne.call(upc, { from: anyone })
 
     // Verify the result set:
-    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
-    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC')
-    assert.equal(resultBufferOne[2], consumerID, 'Error: Missing or Invalid ownerID')
-    assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-    assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-    assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-    assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-    assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+    assertResultBufferOne(resultBufferOne, [
+      sku, upc, consumerID, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude
+    ])
   })
 
   // 10th Test

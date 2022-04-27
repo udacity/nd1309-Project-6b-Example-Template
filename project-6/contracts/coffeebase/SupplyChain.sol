@@ -195,7 +195,8 @@ contract SupplyChain is
     function processItem(uint256 _upc)
         public
         harvested(_upc) // Call modifier to check if upc has passed previous supply chain stage
-        onlyFarmer // Call modifier to verify caller of this function
+        onlyFarmer //
+        verifyCaller(items[_upc].originFarmerID) // Call modifier to verify caller of this function
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Processed;
@@ -208,7 +209,8 @@ contract SupplyChain is
     function packItem(uint256 _upc)
         public
         processed(_upc) // Call modifier to check if upc has passed previous supply chain stage
-        onlyFarmer // Call modifier to verify caller of this function
+        onlyFarmer
+        verifyCaller(items[_upc].originFarmerID) // Call modifier to verify caller of this function
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Packed;
@@ -221,7 +223,8 @@ contract SupplyChain is
     function sellItem(uint256 _upc, uint256 _price)
         public
         packed(_upc) // Call modifier to check if upc has passed previous supply chain stage
-        onlyFarmer // Call modifier to verify caller of this function
+        onlyFarmer
+        verifyCaller(items[_upc].originFarmerID) // Call modifier to verify caller of this function
     {
         // Update the appropriate fields
         items[_upc].itemState = State.ForSale;
@@ -261,7 +264,8 @@ contract SupplyChain is
     function shipItem(uint256 _upc)
         public
         sold(_upc) // Call modifier to check if upc has passed previous supply chain stage
-        onlyFarmer // Call modifier to verify caller of this function
+        onlyFarmer
+        verifyCaller(items[_upc].originFarmerID) // Call modifier to verify caller of this function
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Shipped;
